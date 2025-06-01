@@ -6,7 +6,7 @@ This is a fork from [Gustash/Hyprshot](https://github.com/Gustash/Hyprshot) that
 This fork is only available via Nix flakes:
 1. Add the url to your `flake.nix` input
 ```nix
-hyprshot.url = "github:udontur/hyprshot"
+hyprshot.url = "github:udontur/hyprshot";
 ```
 2. Add the package in `environment.systemPackages`
 ```nix
