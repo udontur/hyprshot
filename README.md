@@ -10,7 +10,7 @@ hyprshot.url = "github:udontur/hyprshot";
 ```
 2. Add the package in `environment.systemPackages`
 ```nix
-inputs.wretch.packages."${system}".default
+inputs.hyprshot.packages."${system}".default
 ```
 3. Rebuild your configuration with nix flakes enabled.
 
