@@ -172,6 +172,7 @@ function begin_grab() {
     if [ ${DELAY} -gt 0 ] 2>/dev/null; then
         sleep ${DELAY}
     fi
+    sleep 0.4
     save_geometry "${geometry}"
 }
 
@@ -197,6 +198,7 @@ function grab_selected_output() {
 
 function grab_region() {
     slurp -d
+    
 }
 
 function grab_window() {
