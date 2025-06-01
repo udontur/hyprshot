@@ -33,6 +33,7 @@
               #Install
               installPhase = ''
                 mkdir -p $out/bin
+                chmod +x hyprshot
                 install -Dm775 ./hyprshot $out/bin/hyprshot
               '';
             };
