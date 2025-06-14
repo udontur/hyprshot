@@ -1,5 +1,5 @@
 {
-  description = " (fork fix) Hyprshot is an utility to easily take screenshots in Hyprland using your mouse. ";
+  description = "github:udontur/hyprshot Nix flake (fork fix)";
   inputs.nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   outputs = { self, nixpkgs }:
     let
@@ -23,7 +23,7 @@
               
               src = self;
               
-              buildInputs = with pkgs;[
+              propagatedBuildInputs = with pkgs;[
                 # Libraries
                 slurp
                 grim
