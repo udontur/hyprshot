@@ -11,29 +11,28 @@
         "aarch64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      pkgs = import nixpkgs { inherit system; };
-        my-name = "hyprshot";
-        my-buildInputs = with pkgs; [
-          slurp
-          grim
-          libnotify
-        ];
-        my-script = (pkgs.writeScriptBin my-name (builtins.readFile ./hyprshot)).overrideAttrs (old: {
-          buildCommand = "${old.buildCommand}\n patchShebangs $out";
-        });
     in
     {
       packages = forAllSystems (
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
+          my-script = (pkgs.writeScriptBin "hyprshot" (builtins.readFile ./hyprshot)).overrideAttrs (old: {
+            buildCommand = "${old.buildCommand}\n patchShebangs $out";
+          });
         in
         {
           default = pkgs.symlinkJoin {
-            name = my-name;
-            paths = [ my-script ] ++ my-buildInputs;
+            name = "hyprshot";
+            paths =
+              [ my-script ]
+              ++ [
+                pkgs.slurp
+                pkgs.grim
+                pkgs.libnotify
+              ];
             buildInputs = [ pkgs.makeWrapper ];
-            postBuild = "wrapProgram $out/bin/${my-name} --prefix PATH : $out/bin";
+            postBuild = "wrapProgram $out/bin/hyprshot --prefix PATH : $out/bin";
           };
         }
       );
@@ -53,24 +52,24 @@
 #       system:
 #       let
 #         pkgs = import nixpkgs { inherit system; };
-#         my-name = "hyprshot";
+#         "hyprshot" = "hyprshot";
 #         my-buildInputs = with pkgs; [
 #           slurp
 #           grim
 #           libnotify
 #         ];
-#         my-script = (pkgs.writeScriptBin my-name (builtins.readFile ./hyprshot)).overrideAttrs (old: {
+#         my-script = (pkgs.writeScriptBin "hyprshot" (builtins.readFile ./hyprshot)).overrideAttrs (old: {
 #           buildCommand = "${old.buildCommand}\n patchShebangs $out";
 #         });
 #       in
 #       rec {
 #         defaultPackage = packages.my-script;
 #         packages.my-script = pkgs.symlinkJoin {
-#           name = my-name;
+#           name = "hyprshot";
 #           paths = [ my-script ] ++ my-buildInputs;
 #           buildInputs = [ pkgs.makeWrapper ];
-#           postBuild = "wrapProgram $out/bin/${my-name} --prefix PATH : $out/bin";
+#           postBuild = "wrapProgram $out/bin/${"hyprshot"} --prefix PATH : $out/bin";
 #         };
 #       }
 #     );
-}
+# }
