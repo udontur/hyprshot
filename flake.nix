@@ -30,10 +30,19 @@
                 libnotify
               ];
 
+              # Build
+              buildPhase = ''
+                chmod +x hyprshot
+              '';
+
               #Install
               installPhase = ''
+                runHook preInstall
+
                 mkdir -p $out/bin
                 install -Dm775 ./hyprshot $out/bin/hyprshot
+
+                runHook postInstall
               '';
             };
         }
