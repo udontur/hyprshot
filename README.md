@@ -21,4 +21,4 @@ hyprshot -m region -z --clipboard-only
 ```
 
 > [!NOTE]
-> Make sure to remove the `hyprshot` package from nixpkgs
+> Make sure to remove the `hyprshot` package from `nixpkgs`
