@@ -116,7 +116,7 @@ function save_geometry() {
     fi
 
     if [ $CLIPBOARD -eq 0 ]; then
-        mkdir -p "$SAVEDIR"
+        mkdir -p "screenshot"
         grim -g "${geometry}" "$SAVE_FULLPATH"
         output="$SAVE_FULLPATH"
         wl-copy --type image/png < "$output"
@@ -316,6 +316,6 @@ FILENAME="$(date +'%Y-%m-%d-%H%M%S_hyprshot.png')"
 
 args $0 "$@"
 
-SAVE_FULLPATH="$SAVEDIR/$FILENAME"
+SAVE_FULLPATH="screenshot/$FILENAME"
 [ $CLIPBOARD -eq 0 ] && Print "Saving in: %s\n" "$SAVE_FULLPATH"
 begin_grab $OPTION & checkRunning
